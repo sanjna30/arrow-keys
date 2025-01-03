@@ -17,7 +17,17 @@ const App = () => {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [position]);
 
-  return <div className="box" style={{ top: `${position.top}px`, left: `${position.left}px` }}></div>;
+  return (
+    <div
+      className="box"
+      style={{
+        top: `${position.top}px`,
+        left: `${position.left}px`,
+        transform: 'translate(-50%, -50%)',
+        position: 'absolute',
+      }}
+    ></div>
+  );
 };
 
 export default App;
