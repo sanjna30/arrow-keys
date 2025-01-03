@@ -12,7 +12,6 @@ const MoveElementWithArrowKeys = () => {
       if (e.key === 'ArrowRight') newPosition.x += 10;
       setPosition(newPosition);
     };
-
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
