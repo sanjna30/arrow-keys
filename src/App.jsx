@@ -1,32 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import './App.css';
 
-const MoveElementWithArrowKeys = () => {
-  const [position, setPosition] = useState({ x: 100, y: 100 });
+const App = () => {
+  const [position, setPosition] = useState({ top: 50, left: 50 });
 
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      const newPosition = { ...position };
-      if (e.key === 'ArrowUp') newPosition.y -= 10;
-      if (e.key === 'ArrowDown') newPosition.y += 10;
-      if (e.key === 'ArrowLeft') newPosition.x -= 10;
-      if (e.key === 'ArrowRight') newPosition.x += 10;
-      setPosition(newPosition);
+    const handleKeyPress = (e) => {
+      const { top, left } = position;
+      if (e.key === 'ArrowUp') setPosition({ top: top - 10, left });
+      if (e.key === 'ArrowDown') setPosition({ top: top + 10, left });
+      if (e.key === 'ArrowLeft') setPosition({ top, left: left - 10 });
+      if (e.key === 'ArrowRight') setPosition({ top, left: left + 10 });
     };
-    window.addEventListener('keydown', handleKeyDown);
 
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
   }, [position]);
 
-  return (
-    <div
-      className="moveable-element"
-      style={{ left: `${position.x}px`, top: `${position.y}px` }}
-    >
-      🚗
-    </div>
-  );
+  return <div className="box" style={{ top: `${position.top}px`, left: `${position.left}px` }}></div>;
 };
 
-export default MoveElementWithArrowKeys;
+export default App;
